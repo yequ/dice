@@ -1,15 +1,63 @@
 <view class="container">
-  <view class="dice-container {{rolling ? 'shake' : ''}}">
-    <block wx:for="{{diceImages}}" wx:key="index">
-      <image class="dice" src="{{item}}" mode="aspectFit"></image>
-    </block>
+  <view class="header slide-in-top">
+    <view class="title">{{rolling ? '摇动中...' : '骰子游戏'}}</view>
+    <view class="subtitle">来试试你的运气</view>
   </view>
-  <view class="button-container">
-    <button class="switch-button" bindtap="toggleDiceCount" disabled="{{rolling}}">
-      切换为{{diceCount === 3 ? '6' : '3'}}个骰子
-    </button>
-    <button class="roll-button" bindtap="rollDice" disabled="{{rolling}}">
-      {{rolling ? '摇动中...' : '摇一摇'}}
-    </button>
+
+  <view class="main-content">
+    <view class="control-panel slide-in-left">
+      <view class="dice-count-selector">
+        <view class="count-control {{diceCount <= 1 ? 'disabled' : ''}} pulse" bindtap="decreaseDice">
+          <text class="control-icon">-</text>
+        </view>
+        <view class="count-display bounce">
+          <text class="count-number">{{diceCount}}</text>
+          <text class="count-label">骰子</text>
+        </view>
+        <view class="count-control {{diceCount >= 9 ? 'disabled' : ''}} pulse" bindtap="increaseDice">
+          <text class="control-icon">+</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="game-area slide-in-right">
+      <view class="dice-container {{rolling ? 'shake' : ''}}">
+        <block wx:for="{{diceImages}}" wx:key="index">
+          <view class="dice-wrapper {{rolling ? '' : 'pop'}} fade-in">
+            <image class="dice {{rolling ? 'spin' : ''}}" src="{{item}}" mode="aspectFit"></image>
+          </view>
+        </block>
+      </view>
+
+      <view class="action-area slide-in-bottom">
+        <button class="roll-button {{rolling ? 'rolling pulse-light' : 'float'}}" 
+                bindtap="rollDice" 
+                disabled="{{rolling}}">
+          <text class="button-text">{{rolling ? '摇动中' : '摇一摇'}}</text>
+          <text class="button-icon rotate">🎲</text>
+        </button>
+      </view>
+    </view>
+
+    <view class="history-panel slide-in-left" wx:if="{{history.length > 0}}">
+      <view class="history-header">
+        <text class="history-title">历史记录</text>
+        <text class="history-subtitle">最近投掷</text>
+      </view>
+      <scroll-view scroll-y class="history-list">
+        <view wx:for="{{history}}" 
+              wx:key="index" 
+              class="history-item {{index === 0 ? 'latest' : ''}} fade-in">
+          <view class="history-content">
+            <view class="history-dice">
+              <text class="dice-numbers">{{item}}</text>
+            </view>
+            <view class="history-meta">
+              <text class="time-label">刚刚</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
   </view>
 </view>

@@ -1,8 +1,12 @@
 App({
-  onLaunch() {
-    // 小程序启动时执行
+  onLaunch: function() {
+    // 空实现
   },
-  globalData: {
-    // 全局数据
-  }
+  onShow: function() {
+    // 空实现
+  },
+  onHide: function() {
+    // 空实现
+  },
+  globalData: {}
 })
