@@ -21,12 +21,21 @@
     </view>
 
     <view class="game-area slide-in-right">
-      <view class="dice-container {{rolling ? 'shake' : ''}}">
+      <view class="dice-container {{rolling ? 'shake' : ''}}"
+            bindlongpress="startHolding"
+            bindtouchstart="startHolding"
+            bindtouchend="endHolding"
+            bindtouchcancel="endHolding">
         <block wx:for="{{diceImages}}" wx:key="index">
           <view class="dice-wrapper {{rolling ? '' : 'pop'}} fade-in">
             <image class="dice {{rolling ? 'spin' : ''}}" src="{{item}}" mode="aspectFit"></image>
           </view>
         </block>
+        <view class="cover {{isCovered ? 'show' : ''}}" 
+              wx:if="{{!rolling}}"
+              catchtap="toggleCover">
+          <text>点击或按住查看</text>
+        </view>
       </view>
 
       <view class="action-area slide-in-bottom">

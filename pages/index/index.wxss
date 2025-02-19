@@ -106,12 +106,44 @@
 }
 
 .dice-container {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 24rpx;
-  padding: 20rpx;
+  gap: 20rpx;
+  padding: 30rpx;
   max-width: 600rpx;
+  touch-action: none;  /* 防止触摸事件冲突 */
+}
+
+.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20rpx;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 100;
+  cursor: pointer;
+}
+
+.cover.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cover text {
+  color: white;
+  font-size: 32rpx;
+  font-weight: 500;
+  pointer-events: none;  /* 防止文本影响点击事件 */
 }
 
 .dice-wrapper {
