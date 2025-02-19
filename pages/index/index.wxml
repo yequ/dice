@@ -1,0 +1,15 @@
+<view class="container">
+  <view class="dice-container {{rolling ? 'shake' : ''}}">
+    <block wx:for="{{diceImages}}" wx:key="index">
+      <image class="dice" src="{{item}}" mode="aspectFit"></image>
+    </block>
+  </view>
+  <view class="button-container">
+    <button class="switch-button" bindtap="toggleDiceCount" disabled="{{rolling}}">
+      切换为{{diceCount === 3 ? '6' : '3'}}个骰子
+    </button>
+    <button class="roll-button" bindtap="rollDice" disabled="{{rolling}}">
+      {{rolling ? '摇动中...' : '摇一摇'}}
+    </button>
+  </view>
+</view>
