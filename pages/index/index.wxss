@@ -210,6 +210,8 @@
   font-size: 44rpx;
 }
 
+
+
 .history-panel {
   margin: 0 30rpx;
   padding: 30rpx;

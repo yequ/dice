@@ -14,6 +14,24 @@ Page({
     lastResult: null  // 存储上一次的结果
   },
 
+  // 用户点击右上角分享
+  onShareAppMessage: function() {
+    const diceResult = this.data.lastResult || '1 1 1';
+    return {
+      title: `我掷出了 ${diceResult}，来试试你的手气！`,
+      path: '/pages/index/index'
+    }
+  },
+
+  // 用户点击右上角分享到朋友圈
+  onShareTimeline: function() {
+    const diceResult = this.data.lastResult || '1 1 1';
+    return {
+      title: `骰子游戏：我掷出了 ${diceResult}，来试试你的手气！`,
+      query: ''
+    }
+  },
+
   increaseDice: function() {
     if (this.data.rolling || this.data.diceCount >= 9) return;
     
